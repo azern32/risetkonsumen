@@ -66,41 +66,8 @@ var itemsArray = [a1,a2,a3,b1];
 
 
 function showItem(){
-	for(var i = 0; i < itemsArray.length; i++){
-	/*
-		$("#itemShow").append(
-			`<div class="col-md-3 col-sm-6">`
-			+	`<figure class="card card-product">`
-			+		`<div class="img-wrap"> <img src="assets/template/images/items/${i + 1}.jpg"></div>`
-			+		`<figcaption class="info-wrap">`
-			+			`<a href="#" class="title">${itemsArray[i].name}</a>`
-			+			`<div class="price-wrap" id="price-${itemsArray[i].name}">`
-			+				`<span class="price-new">Rp ${itemsArray[i].price}</span>`
-//			+				`<del class="price-old">$1980</del>`
-			+			`</div> <!-- price-wrap. -->`
-			+			`<hr>`				
-			+		`<label>Beli</label>`
-			+		`</figcaption>`
-			+	`</figure> <!-- card -->`	+
-			`</div> <!-- col -->`
-		);
-		console.log(itemsArray[i].price_old);
-		
-		if (itemsArray[i].price_old_ == NaN){
-			// do nothing
-			console.log('no old price')
-		} else {
-			$(`#price-${itemsArray[i].name}`).append(
-			//	`<del class="price-old">Rp ${itemsArray[i].price_old}</del>`
-				`<del class="price-old">yeet</del>`
-			
-			);
-			console.log('have old price')
-		};		
-	*/
-	// ----------------------------------------------------------		
-
-	if (itemsArray[i].price_old == undefined){
+	for(var i = 0; i < itemsArray.length; i++){	
+		if (itemsArray[i].price_old == undefined){
 			console.log("true")
 			$("#itemShow").append(
 				`<div class="col-md-3 col-sm-6">`
@@ -110,7 +77,6 @@ function showItem(){
 				+			`<a href="#" class="title">${itemsArray[i].name}</a>`
 				+			`<div class="price-wrap" id="price-${itemsArray[i].name}">`
 				+				`<span class="price-new">Rp ${itemsArray[i].price}</span>`
-	//			+				`<del class="price-old">$1980</del>`
 				+			`</div> <!-- price-wrap. -->`
 				+			`<hr>`				
 				+		`<label>Beli</label>`
@@ -136,7 +102,6 @@ function showItem(){
 				+	`</figure> <!-- card -->`	+
 				`</div> <!-- col -->`
 			);
-	};
-	
+		};	
 	};
 };
