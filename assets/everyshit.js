@@ -1,3 +1,6 @@
+var currentKey;
+var vault = window.localStorage;
+var cart = [];
 var account = {
 	"name" : "",
 	"nameshort" : "",
@@ -8,31 +11,38 @@ var account = {
 	"universitas" : "",
 
 	addName : function(name_){
+		vault.name =  String(name_);
 		return this.name = String(name_);
 	},
 
 	addNameShort : function(nameshort_){
+		vault.nameShort = String(nameshort_);
 		return this.nameShort = String(nameshort_);
 	},
 
 	addSex : function(sex_){
+		vault.sex = String(sex_);
 		return this.sex = String(sex_);
 	},
 
 	addAge : function(age_){
+		vault.age = Number(age_);
 		return this.age = Number(age_);
 	},
 
 	addProdi : function(prodi_){
+		vault.prodi = String(prodi_);
 		return this.prodi = String(prodi_);
 	},
 
 	addFakulty : function(fakultas_){
+		vault.fakultas = String(fakultas_);
 		return this.fakultas = String(fakultas_);
 	},
 
 	addUniversity : function(uni_){
-		return this.fakultas =String(uni_);
+		vault.universitas = String(uni_);
+		return this.universitas = String(uni_);
 	},
 
 
@@ -62,6 +72,13 @@ class Items {
 		this.review = star_review_;
 		this.description = description_;
 	}
+};
+
+function parseURL(anjir){
+	var parsingURL = window.location.href;
+	var parsedURL = parsingURL.split('?');
+	var kode = parsedURL[parsedURL.length - anjir];
+	return kode;
 };
 
 
@@ -114,8 +131,8 @@ function showItem(){
 };
 
 function goToProductDetail(shit) {
-	if (shit) {
-		location.href = "product-detail.html?" + shit
+	if (currentKey) {
+		location.href = "product-detail.html?" + shit + "?" + currentKey
 	}
 };
 
@@ -132,12 +149,15 @@ function simpanData() {
 	// Root database
 	var idih = firebase.database().ref('/');
 	idih.once('value').then(function(snapshot){});
-	idih.push({
+	currentKey = idih.push({
 		name 				: account.name,
 		age					: account.age,
 		sex					: account.sex,
 		prodi				: account.prodi,
 		fakultas		: account.fakultas,
 		universitas	: account.universitas
-	});
+	}).getKey();
+	setTimeout(function () {
+		vault.setItem("currentAccount", currentKey)
+	}, 3000);
 }

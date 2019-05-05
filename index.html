@@ -91,13 +91,13 @@ $(document).ready(function() {
 				<a href="#" data-toggle="dropdown" data-offset="20,10">
 					<div class="icontext">
 						<div class="icon-wrap"><i class="text-warning icon-sm fa fa-user"></i></div>
-						<div class="text-wrap text-dark">
+						<div class="text-wrap text-dark" id="justshit">
 							Klik disini untuk </br> mengisi data anda <i class="fa fa-caret-down"></i>
 						</div>
 					</div>
 				</a>
 				<div class="dropdown-menu" style="overflow-y:scroll; height:450px;">
-					<a class="dropdown-item">Isilah data-data berikut sesuai data diri anda</a>
+					<a class="dropdown-item" >Isilah data-data berikut sesuai data diri anda</a>
 					<hr class="dropdown-divider">
 					<form class="px-4 py-3">
 						<div class="form-group">
@@ -276,6 +276,11 @@ var config = {
 
 <script type="text/javascript">
 	showItem()
+
+	if (parseURL(1) !== ("http://127.0.0.1/risetkonsumen/index.html" || "http://127.0.0.1/risetkonsumen/")) {
+		currentKey = parseURL(1);
+		$('#justshit').text('Silahkan lanjutkan belanja anda')
+	}
 </script>
 
 </body>

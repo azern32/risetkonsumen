@@ -51,7 +51,7 @@ $(document).ready(function() {
 <header class="section-header">
 <section class="header-main">
 	<div class="container">
-    	<a href="http://127.0.0.1/risetkonsumen/index.html" class="btn  btn-outline-warning"> Back to previous page </a>
+    	<a class="btn btn-outline-warning" id="back_button" onclick="back()"> Back to previous page </a>
 	</div> <!-- container.// -->
 </section> <!-- header-main .// -->
 </header> <!-- section-header.// -->
@@ -255,21 +255,16 @@ var config = {
 <script src="assets/everyshit.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-  function parseURL(){
-  	var parsingURL = window.location.href;
-  	var parsedURL = parsingURL.split('?');
-  	var kode = parsedURL[parsedURL.length - 1];
-  	return kode;
-  };
+
 
   function loadItem() {
-    $("#nama-item").text(itemsArray[parseURL()].name);
-    $("#harga-baru").text(itemsArray[parseURL()].price);
-    $("#deskripsi").text(itemsArray[parseURL()].description);
-    $("#model").text(itemsArray[parseURL()].model);
-    $("#warna").text(itemsArray[parseURL()].color);
-    $("#jumlah-star").css("width",`${itemsArray[parseURL()].stars}%`);
-    $("#jumlah-review").text(itemsArray[parseURL()].review);
+    $("#nama-item").text(itemsArray[parseURL(2)].name);
+    $("#harga-baru").text(itemsArray[parseURL(2)].price);
+    $("#deskripsi").text(itemsArray[parseURL(2)].description);
+    $("#model").text(itemsArray[parseURL(2)].model);
+    $("#warna").text(itemsArray[parseURL(2)].color);
+    $("#jumlah-star").css("width",`${itemsArray[parseURL(2)].stars}%`);
+    $("#jumlah-review").text(itemsArray[parseURL(2)].review);
   };
 
   loadItem()
@@ -278,13 +273,36 @@ var config = {
     if ($("#jumlah-item").val() == 0) {
       alert("Mohon mengisi Quantity")
     } else {
-      account.addCart(itemsArray[parseURL()].kode, $("#jumlah-item").val());
-      
-      setTimeout(function () {
+			if (vault.cart == undefined) {
+				cart.push([itemsArray[parseURL(2)].kode, Number($("#jumlah-item").val())])
+				setTimeout(function () {
+					vault.cart = JSON.stringify(cart);
+					console.log(vault.cart);
+				}, 500);
+			} else {
+				cart = JSON.parse(vault.cart)
+				setTimeout(function () {
+					cart.push([itemsArray[parseURL(2)].kode, Number($("#jumlah-item").val())])
+					setTimeout(function () {
+						vault.cart = JSON.stringify(cart);
+						console.log(vault.cart);
+					}, 100);
+				}, 500);
+			};
+
+			setTimeout(function () {
         // location.href = "index.html?"
       }, 1000);
     };
-  }
+  };
+
+	function checkout() {
+		firebase.database().ref(`/${parseURL(1)}/cart/`).set(vault.cart);
+	}
+
+	function back() {
+		location.href = "index.html?" + parseURL(1);
+	};
 </script>
 
 </body>
