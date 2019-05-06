@@ -68,7 +68,6 @@ var itemsArray = [a1,a2,a3,b1];
 function showItem(){
 	for(var i = 0; i < itemsArray.length; i++){	
 		if (itemsArray[i].price_old == undefined){
-			console.log("true")
 			$("#itemShow").append(
 				`<div class="col-md-3 col-sm-6">`
 				+	`<figure class="card card-product">`
@@ -85,7 +84,6 @@ function showItem(){
 				`</div> <!-- col -->`
 			);
 		} else {
-			console.log("false")
 			$("#itemShow").append(
 				`<div class="col-md-3 col-sm-6">`
 				+	`<figure class="card card-product">`
