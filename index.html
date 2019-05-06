@@ -55,6 +55,7 @@ $(document).ready(function() {
 
 <section class="header-main shadow-sm">
 	<div class="container">
+		<a class="btn btn-outline-warning" id="back_button" href="http://127.0.0.1/risetkonsumen/index.html"> Reset </a>
 <div class="row-sm align-items-center">
 	<div class="col-lg-4-24 col-sm-3">
 	<!--<div class="category-wrap dropdown py-1">
@@ -94,13 +95,13 @@ $(document).ready(function() {
 				<a href="#" data-toggle="dropdown" data-offset="20,10">
 					<div class="icontext">
 						<div class="icon-wrap"><i class="text-warning icon-sm fa fa-user"></i></div>
-						<div class="text-wrap text-dark">
+						<div class="text-wrap text-dark" id="justshit">
 							Klik disini untuk </br> mengisi data anda <i class="fa fa-caret-down"></i>
 						</div>
 					</div>
 				</a>
 				<div class="dropdown-menu" style="overflow-y:scroll; height:450px;">
-					<a class="dropdown-item">Isilah data-data berikut sesuai data diri anda</a>
+					<a class="dropdown-item" >Isilah data-data berikut sesuai data diri anda</a>
 					<hr class="dropdown-divider">
 					<form class="px-4 py-3">
 						<div class="form-group">
@@ -122,37 +123,37 @@ $(document).ready(function() {
 							    <input type="radio" id="jenisKelakinLaki" name="jenis-kelamin" value="Laki-laki">
 							    <label for="jenisKelakinLaki">Laki-laki</label>
 							  </div>
-						  
+
 						      <div class="col-6">
 							    <input type="radio" id="jenisKelakinPerempuan" name="jenis-kelamin" value="Perempuan">
 							    <label for="jenisKelakinPerempuan">Perempuan</label>
 							  </div>
 							</div>
 						</div>
-						
+
 						<hr class="dropdown-divider">
-						
+
 						<div class="form-group">
 						  <label>Program Studi</label>
 						  <input type="text" class="form-control" placeholder="Prodi" id="prodiPeserta">
 						</div>
-						
+
 						<div class="form-group">
 						  <label>Fakultas</label>
 						  <input type="text" class="form-control" placeholder="Fakultas" id="fakultasPeserta">
 						</div>
-						
+
 						<div class="form-group">
 						  <label>Universitas</label>
 						  <input type="text" class="form-control" placeholder="Universitas" id="univPeserta">
 						</div>
-						
-						<button type="submit" class="btn btn-primary">Simpan</button>
+
+						<div onclick="simpanData()" class="btn btn-primary">Simpan</div>
 						</form>
 				</div> <!--  dropdown-menu .// -->
 			</div>  <!-- widget-header .// -->
 			</div> <!-- col.// -->
-			
+
 		</div> <!-- widgets-wrap.// row.// -->
 	</div> <!-- col.// -->
 </div> <!-- row.// -->
@@ -176,14 +177,14 @@ $(document).ready(function() {
 				<div class="price-wrap">
 					<span class="price-new">$1280</span>
 					<del class="price-old">$1980</del>
-				</div> 
-				<hr>				
+				</div>
+				<hr>
 			<label>Beli</label>
 			</figcaption>
 		</figure>
 	</div>
-	-->	
-</div> 
+	-->
+</div>
 
 
 </div><!-- container // -->
@@ -270,13 +271,21 @@ var config = {
     storageBucket: "riset-konsumen.appspot.com",
     messagingSenderId: "750585038868"
   };
-  
+
   firebase.initializeApp(config);
 </script>
 
 <!-- My own plugin -->
-<script src="assets/account.js" type="text/javascript"></script>
+<script src="assets/everyshit.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+	showItem()
+
+	if (parseURL(1) !== ("http://127.0.0.1/risetkonsumen/index.html" || "http://127.0.0.1/risetkonsumen/")) {
+		currentKey = parseURL(1);
+		$('#justshit').text('Silahkan lanjutkan belanja anda')
+	}
+</script>
 
 </body>
 </html>
