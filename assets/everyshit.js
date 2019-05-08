@@ -1,5 +1,7 @@
 var currentKey;
 var vault = window.localStorage;
+vault.cash = 500000;
+vault.cashUsed = 0;
 var cart = [];
 var account = {
 	"name" : "",

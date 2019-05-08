@@ -275,17 +275,19 @@ var config = {
     } else {
 			if (vault.cart == undefined) {
 				cart.push([itemsArray[parseURL(2)].kode, Number($("#jumlah-item").val())])
+				vault.cashUsed = Number(vault.cashUsed) + Number([itemsArray[parseURL(2)].price * Number($("#jumlah-item").val())]) 
 				setTimeout(function () {
 					vault.cart = JSON.stringify(cart);
-					console.log(vault.cart);
+					console.log(vault.cart + " + " + vault.cashUsed);
 				}, 500);
 			} else {
 				cart = JSON.parse(vault.cart)
 				setTimeout(function () {
 					cart.push([itemsArray[parseURL(2)].kode, Number($("#jumlah-item").val())])
+					vault.cashUsed = Number(vault.cashUsed) + Number([itemsArray[parseURL(2)].price * Number($("#jumlah-item").val())])
 					setTimeout(function () {
 						vault.cart = JSON.stringify(cart);
-						console.log(vault.cart);
+						console.log(vault.cart + " + " + vault.cashUsed);
 					}, 100);
 				}, 500);
 			};
