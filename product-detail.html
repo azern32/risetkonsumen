@@ -152,7 +152,7 @@ $(document).ready(function() {
 	</div> <!-- row.// -->
 	<hr>
 	<a class="btn  btn-warning" onclick="buy()"> <i class="fa fa-shopping-cart"></i> Tambahkan ke keranjang </a>
-	<a class="btn  btn-outline-warning" data-toggle="modal" data-target="#checout-modal" onclick="checkout()"> Checkout </a>
+	<a class="btn  btn-outline-warning" data-toggle="modal" data-target="#checout-modal"> Checkout </a>
 <!-- short-info-wrap .// -->
 </article> <!-- card-body.// -->
 		</aside> <!-- col.// -->
@@ -297,7 +297,7 @@ var config = {
     } else {
 			if (vault.cart == undefined) {
 				cart.push([itemsArray[parseURL(2)].kode, Number($("#jumlah-item").val())])
-				vault.cashUsed = Number(vault.cashUsed) + Number([itemsArray[parseURL(2)].price * Number($("#jumlah-item").val())])
+				// vault.cashUsed = Number(vault.cashUsed) + Number([itemsArray[parseURL(2)].price * Number($("#jumlah-item").val())])
 				setTimeout(function () {
 					vault.cart = JSON.stringify(cart);
 					console.log(vault.cart + " + " + vault.cashUsed);
@@ -306,7 +306,7 @@ var config = {
 				cart = JSON.parse(vault.cart)
 				setTimeout(function () {
 					cart.push([itemsArray[parseURL(2)].kode, Number($("#jumlah-item").val())])
-					vault.cashUsed = Number(vault.cashUsed) + Number([itemsArray[parseURL(2)].price * Number($("#jumlah-item").val())])
+					// vault.cashUsed = Number(vault.cashUsed) + Number([itemsArray[parseURL(2)].price * Number($("#jumlah-item").val())])
 					setTimeout(function () {
 						vault.cart = JSON.stringify(cart);
 						console.log(vault.cart + " + " + vault.cashUsed);
@@ -326,10 +326,13 @@ var config = {
 	function checkout() {
 		// Send to firebase
 		firebase.database().ref(`/${parseURL(1)}/cart/`).set(vault.cart);
-		firebase.database().ref(`/${parseURL(1)}/uangTersisa/`).set(cashUsed);
+		firebase.database().ref(`/${parseURL(1)}/uangTerpakai/`).set(vault.cashUsed).then(
+			alert('Terima kasih telah berpartisipasi dalam penelitian kami.')
 
-		alert('Terima kasih telah berpartisipasi dalam penelitian kami.')
+		);
 	};
+
+
 
 	function back() {
 		location.href = "index.html?" + parseURL(1);
@@ -345,6 +348,7 @@ var config = {
 				+		`</li>`
 				+	`</ul> `).appendTo('#modal-list-item')
 				cashUsed += eval(itulah[i][0]).price * itulah[i][1];
+				vault.cashUsed = cashUsed
 		};
 		$(`<hr>`
 			+ `<p>Total pembayaran = IDR ${cashUsed}</p>`).appendTo('#modal-list-item')

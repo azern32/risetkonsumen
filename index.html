@@ -285,6 +285,10 @@ var config = {
 		currentKey = parseURL(1);
 		$('#justshit').text(`Saldo : ${vault.cash}`)
 	}
+
+	$('#back_button').on('click',function() {
+		vault.clear()
+	})
 </script>
 
 </body>

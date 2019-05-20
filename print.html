@@ -82,18 +82,7 @@
       </tr>
     </thead>
     <tbody id="bodyTabel">
-      <tr>
-        <td>Saya</td>
-        <td>99</td>
-        <td>Teknik Sastra</td>
-        <td>Ekonomi & Bisnis</td>
-        <td>Negeri Jiran</td>
-        <td>99999</td>
-        <td>3</td>
-        <td>4</td>
-        <td>4</td>
-        <td>1</td>
-      </tr>
+      <!-- Tempat isi tabel -->
     </tbody>
   </table>
 
@@ -131,7 +120,7 @@
           +   `<td>${childNodes.val().prodi}</td>`
           +   `<td>${childNodes.val().fakultas}</td>`
           +   `<td>${childNodes.val().universitas}</td>`
-          +   `<td id='${childNodes.key}-totalbelanja'></td>`
+          +   `<td id='${childNodes.key}-totalbelanja'>${childNodes.val().uangTerpakai}</td>`
           +   `<td id='${childNodes.key}-a1'></td>`
           +   `<td id='${childNodes.key}-a2'></td>`
           +   `<td id='${childNodes.key}-a3'></td>`
