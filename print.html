@@ -1,0 +1,174 @@
+<head>
+  <link rel="stylesheet" href="assets/tableexport.css">
+
+
+  <!-- jQuery -->
+  <script src="assets/jquery-3.3.1.js" type="text/javascript"></script>
+
+  <!-- Bootstrap4 files-->
+  <script src="assets/template/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+  <link href="assets/template/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+
+  <!-- Font awesome 5 -->
+  <link href="assets/template/fonts/fontawesome/css/fontawesome-all.min.css" type="text/css" rel="stylesheet">
+
+
+
+  <!-- custom style -->
+  <link href="assets/template/css/ui.css" rel="stylesheet" type="text/css"/>
+  <link href="assets/template/css/responsive.css" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+
+  <!-- custom javascript -->
+  <script src="assets/template/js/script.js" type="text/javascript"></script>
+
+  <style>
+    /* @media print {
+      table {page-break-after: avoid;}
+    }; */
+
+    table {
+      border-collapse: collapse;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+
+    ul {
+      list-style-type: none;
+    margin: 0px;
+    }
+
+  /* .tab-1 {
+    padding-left: 40px;
+  }
+
+  .tab-2 {
+    padding-left: 80px;
+  }
+
+  .tab-3 {
+    padding-left: 120px;
+  }
+
+  .tab-4 {
+    padding-left: 160px;
+  }
+
+  .tab-5{
+    padding-left: 200px;
+  } */
+
+  </style>
+</head>
+<body>
+  <table id="Tabel">
+    <thead>
+      <tr>
+        <th rowspan="2">Nama</th>
+        <th rowspan="2">Umur (dalam tahun)</th>
+        <th rowspan="2">Prodi</th>
+        <th rowspan="2">Fakultas</th>
+        <th rowspan="2">Universitas</th>
+        <th rowspan="2">Total Belanja (dalam Rp)</th>
+        <th colspan="4">Barang belanja</th>
+      </tr>
+      <tr>
+        <th>A1</th>
+        <th>A2</th>
+        <th>A3</th>
+        <th>B1</th>
+      </tr>
+    </thead>
+    <tbody id="bodyTabel">
+      <tr>
+        <td>Saya</td>
+        <td>99</td>
+        <td>Teknik Sastra</td>
+        <td>Ekonomi & Bisnis</td>
+        <td>Negeri Jiran</td>
+        <td>99999</td>
+        <td>3</td>
+        <td>4</td>
+        <td>4</td>
+        <td>1</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>
+  <script>
+  var config = {
+      apiKey: "AIzaSyBp2C3PYzLR_4W275cIv4X06fg1ldOIaIo",
+      authDomain: "riset-konsumen.firebaseapp.com",
+      databaseURL: "https://riset-konsumen.firebaseio.com",
+      projectId: "riset-konsumen",
+      storageBucket: "riset-konsumen.appspot.com",
+      messagingSenderId: "750585038868"
+    };
+
+    firebase.initializeApp(config);
+  </script>
+
+  <!-- My own plugin -->
+  <script src="assets/everyshit.js" type="text/javascript"></script>
+
+  <script type="text/javascript">
+    var isiCart,isiBelanja;
+    firebase.database().ref("/").on('value', function(snap){
+       snap.forEach(function(childNodes){
+          //This loop iterates over children of user_id
+          //childNodes.key is key of the children of userid such as (20170710)
+          //childNodes.val().name;
+          //childNodes.val().time;
+          //childNodes.val().rest_time;
+          //childNodes.val().interval_time;
+          $(`<tr id=${childNodes.key}>`
+          +   `<td>${childNodes.val().name}</td>`
+          +   `<td>${childNodes.val().age}</td>`
+          +   `<td>${childNodes.val().prodi}</td>`
+          +   `<td>${childNodes.val().fakultas}</td>`
+          +   `<td>${childNodes.val().universitas}</td>`
+          +   `<td id='${childNodes.key}-totalbelanja'></td>`
+          +   `<td id='${childNodes.key}-a1'></td>`
+          +   `<td id='${childNodes.key}-a2'></td>`
+          +   `<td id='${childNodes.key}-a3'></td>`
+          +   `<td id='${childNodes.key}-b1'></td>`
+          + `<tr>`).appendTo('#bodyTabel');
+
+          // Here to parse the cart
+          isiCart = JSON.parse(childNodes.val().cart)
+
+
+          // This part to make all possible listed items
+          // let
+          isiBelanja = [];
+          itemsArray.forEach(function(element) {
+            isiBelanja.push([[element.kode],[0]])
+          });
+
+          // This loop to add all same item to a single item with number
+          for (var i = 0; i < isiBelanja.length; i++) {
+            for (var j = 0; j < isiCart.length; j++) {
+              if (isiCart[j][0] == isiBelanja[i][0]) {
+                // Kalo isiBelanjanya nda kosong, tambah isinya
+                isiBelanja[i][1] = Number(isiBelanja[i][1]) + Number(isiCart[j][1])
+
+                // Masukkan angkanya ke table
+                $(`#${childNodes.key}-${isiBelanja[i][0]}`).text(`${isiBelanja[i][1]}`)
+              } else {
+                // Masukkan angkanya ke table
+                $(`#${childNodes.key}-${isiBelanja[i][0]}`).text(`${isiBelanja[i][1]}`)
+              }
+            }
+          }
+
+
+      });
+    });
+  </script>
+
+  <script src="assets/saveAsExcel.js"></script>
+</body>
