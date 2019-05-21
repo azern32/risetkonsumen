@@ -175,7 +175,7 @@ $(document).ready(function() {
 
       </div>
       <div class="modal-footer">
-				<a class="btn  btn-warning" > <i class="fa fa-shopping-cart" onclick="checkout()"></i> Bayar </a>
+				<a class="btn  btn-warning" > <i class="fa fa-shopping-cart" onclick="checkout(alertApalah)"></i> Bayar </a>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -324,13 +324,14 @@ var config = {
     };
   };
 
-	function checkout() {
+	function checkout(callback) {
 		// Send to firebase
 		firebase.database().ref(`/${parseURL(1)}/cart/`).set(vault.cart);
 		firebase.database().ref(`/${parseURL(1)}/uangTerpakai/`).set(vault.cashUsed).then(
 			alert('Terima kasih telah berpartisipasi dalam penelitian kami.')
 
 		);
+		callback()
 	};
 
 

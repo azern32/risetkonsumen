@@ -216,7 +216,7 @@ function goToProductDetail(shit) {
 	}
 };
 
-function simpanData() {
+function simpanData(callback) {
 	account.addName($('#namaPeserta').val());
 	account.addNameShort($('#namaPanggilanPeserta').val());
 	account.addAge($('#usiaPeserta').val());
@@ -240,5 +240,10 @@ function simpanData() {
 	setTimeout(function () {
 		vault.setItem("currentAccount", currentKey)
 	}, 500);
-	
+	callback()
+}
+
+
+function alertApalah (){
+	alert('Sudah ter klik');
 }
