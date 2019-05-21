@@ -239,6 +239,6 @@ function simpanData() {
 	}).getKey();
 	setTimeout(function () {
 		vault.setItem("currentAccount", currentKey)
-		location.href = "index.html?" + currentKey
 	}, 500);
+	
 }
