@@ -102,7 +102,7 @@ function showItem(){
 			$("#itemShow").append(
 				`<div class="col-md-3 col-sm-6" onclick="goToProductDetail(${[i]})">`
 				+	`<figure class="card card-product">`
-				+		`<div class="img-wrap"> <img src="assets/template/images/items/${i + 1}.jpg"></div>`
+				+		`<div class="img-wrap"> <img src="assets/template/images/items/${itemsArray[i].kode}.jpg"></div>`
 				+		`<figcaption class="info-wrap">`
 				+			`<a href="#" class="title">${itemsArray[i].name}</a>`
 				+			`<div class="price-wrap" id="price-${itemsArray[i].name}">`
@@ -117,7 +117,7 @@ function showItem(){
 			$("#itemShow").append(
 				`<div class="col-md-3 col-sm-6" onclick="goToProductDetail(${[i]})">`
 				+	`<figure class="card card-product">`
-				+		`<div class="img-wrap"> <img src="assets/template/images/items/${i + 1}.jpg"></div>`
+				+		`<div class="img-wrap"> <img src="assets/template/images/items/${itemsArray[i].kode}.jpg"></div>`
 				+		`<figcaption class="info-wrap">`
 				+			`<a href="#" class="title">${itemsArray[i].name}</a>`
 				+			`<div class="price-wrap" id="price-${itemsArray[i].name}">`

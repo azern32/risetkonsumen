@@ -71,7 +71,7 @@ $(document).ready(function() {
 		<aside class="col-sm-6 border-right">
 <article class="gallery-wrap">
 <div class="img-big-wrap">
-  <div> <a href="images/items/1.jpg" data-fancybox=""><img src="assets/template/images/items/1.jpg"></a></div>
+  <div> <a href="images/items/1.jpg" data-fancybox=""><img src="assets/template/images/items/a1.jpg" id="gambarItem"></a></div>
 </div> <!-- slider-product.// -->
 
 </article> <!-- gallery-wrap .end// -->
@@ -287,6 +287,7 @@ var config = {
     $("#warna").text(itemsArray[parseURL(2)].color);
     $("#jumlah-star").css("width",`${itemsArray[parseURL(2)].stars}%`);
     $("#jumlah-review").text(itemsArray[parseURL(2)].review);
+	$("#gambarItem").attr('src',`assets/template/images/items/${itemsArray[parseURL(2)].kode}.jpg`)
   };
 
   loadItem()
